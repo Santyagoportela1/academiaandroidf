@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Android Fight | Força, Disciplina & Família</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF5E00',
+                            orangeHover: '#E04F00',
+                            dark: '#0D0D0E',
+                            card: '#161618',
+                            border: '#27272A',
+                            accent: '#FF7E26'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Impact', 'Arial Black', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos e Efeitos Customizados */
+        .text-glow {
+            text-shadow: 0 0 25px rgba(255, 94, 0, 0.45);
+        }
+        .border-glow:hover {
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.35);
+        }
+        .grain-bg {
+            background-color: #0b0b0c;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 94, 0, 0.08) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(255, 94, 0, 0.05) 0%, transparent 35%);
+        }
+        .badge-kids {
+            background: linear-gradient(135deg, #FF7E26, #E04F00);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-orange selection:text-white">
+
+    <!-- Top Info Bar -->
+    <div class="bg-neutral-900 border-b border-brand-border text-xs py-2 px-4 text-center sm:text-left flex flex-wrap justify-between items-center gap-2 max-w-7xl mx-auto">
+        <div class="flex items-center gap-4 mx-auto sm:mx-0 text-gray-400">
+            <span><i class="fa-solid fa-location-dot text-brand-orange mr-1.5"></i> Academia de Bairro & Tatame Comunitário</span>
+            <span class="hidden md:inline"><i class="fa-solid fa-clock text-brand-orange mr-1.5"></i> Segunda a Sábado</span>
+        </div>
+        <div class="mx-auto sm:mx-0 flex items-center gap-3">
+            <span class="text-gray-400">Fale Conosco:</span>
+            <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20treinos%20da%20Android%20Fight" 
+               target="_blank" 
+               class="text-brand-orange hover:text-white transition flex items-center font-bold">
+                <i class="fa-brands fa-whatsapp text-sm mr-1"></i> (86) 99572-9225
+            </a>
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-brand-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-orange to-red-600 flex items-center justify-center text-white shadow-lg shadow-brand-orange/30 group-hover:scale-105 transition">
+                    <i class="fa-solid fa-dumbbell text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-wider text-white flex items-center">
+                        ANDROID<span class="text-brand-orange ml-1">FIGHT</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest uppercase text-gray-400 block font-semibold">CT & Artes Marciais</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-300">
+                <a href="#modalidades" class="hover:text-brand-orange transition">Modalidades</a>
+                <a href="#kids" class="hover:text-brand-orange text-orange-400 flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-shield-cat text-xs"></i> Espaço Kids
+                </a>
+                <a href="#lembrete" class="hover:text-brand-orange transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-bell text-xs text-brand-orange"></i> Lembrete de Matrícula
+                </a>
+                <a href="#regras" class="hover:text-brand-orange transition">Como Funciona</a>
+                <a href="#contato" class="hover:text-brand-orange transition">Contato</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="flex items-center gap-3">
+                <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Vim%20pelo%20site%20e%20quero%20agendar%20minha%20AULA%20EXPERIMENTAL%20grátis!"
+                   target="_blank"
+                   class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-orange/20 transition flex items-center gap-2 hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Agendar Aula Grátis</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="grain-bg">
+        <!-- Hero Section -->
+        <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange text-xs font-bold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+                            Treinos para Todas as Idades • Do Bairro para o Ringue
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase leading-none">
+                            Construa sua <span class="text-brand-orange text-glow">melhor versão</span> dentro e fora do tatame.
+                        </h1>
+
+                        <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
+                            A <strong class="text-gray-200">Android Fight</strong> une artes marciais de alta performance, condicionamento físico funcional e formação esportiva infantil em um ambiente familiar, motivador e acessível.
+                        </p>
+
+                        <!-- Highlights list -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-left">
+                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl">
+                                <i class="fa-solid fa-users text-brand-orange mb-1 text-lg"></i>
+                                <div class="font-bold text-sm text-white">Turmas Kids & Adulto</div>
+                                <div class="text-xs text-gray-400">Do iniciante ao avançado</div>
+                            </div>
+                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl">
+                                <i class="fa-solid fa-heart-pulse text-brand-orange mb-1 text-lg"></i>
+                                <div class="font-bold text-sm text-white">Cross Training</div>
+                                <div class="text-xs text-gray-400">Queima e fortalecimento</div>
+                            </div>
+                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl col-span-2 sm:col-span-1">
+                                <i class="fa-solid fa-calendar-check text-brand-orange mb-1 text-lg"></i>
+                                <div class="font-bold text-sm text-white">Cobrança Justa</div>
+                                <div class="text-xs text-gray-400">Vencimento na sua data</div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Row -->
+                        <div class="pt-4 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                            <a href="#lembrete" class="bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-white px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition">
+                                <i class="fa-solid fa-calculator text-brand-orange"></i>
+                                <span>Simulador & Lembrete de Matrícula</span>
+                            </a>
+                            <a href="#modalidades" class="text-gray-300 hover:text-white px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 border border-brand-border hover:border-brand-orange transition">
+                                Ver Modalidades
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Card Hero Visual -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative bg-gradient-to-b from-brand-card to-black p-6 sm:p-8 rounded-3xl border border-brand-border shadow-2xl overflow-hidden border-glow transition duration-300">
+                            <div class="absolute -top-12 -right-12 w-48 h-48 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <div class="flex items-center justify-between pb-6 border-b border-brand-border">
+                                <div>
+                                    <span class="text-xs font-bold text-brand-orange uppercase">Quadro Oficial</span>
+                                    <h3 class="text-xl font-black text-white uppercase">Modalidades Ativas</h3>
+                                </div>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 border border-emerald-500/30">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Matrículas Abertas
+                                </span>
+                            </div>
+
+                            <ul class="divide-y divide-brand-border/60 text-sm py-4 space-y-2">
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-hand-fist text-brand-orange"></i> Muay Thai
+                                    </span>
+                                    <span class="text-xs bg-neutral-800 text-gray-300 px-2 py-0.5 rounded">Geral</span>
+                                </li>
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-ribbon text-brand-orange"></i> Jiu-Jitsu
+                                    </span>
+                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
+                                </li>
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-mitten text-brand-orange"></i> Boxe Tradicional
+                                    </span>
+                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
+                                </li>
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-user-ninja text-brand-orange"></i> Karatê
+                                    </span>
+                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
+                                </li>
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-fire text-brand-orange"></i> Sanda (Boxe Chinês)
+                                    </span>
+                                    <span class="text-xs bg-neutral-800 text-gray-300 px-2 py-0.5 rounded">Técnica & Quedas</span>
+                                </li>
+                                <li class="flex items-center justify-between py-2">
+                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
+                                        <i class="fa-solid fa-bolt text-brand-orange"></i> Crosstrainer & Funcional
+                                    </span>
+                                    <span class="text-xs bg-brand-orange/20 text-brand-orange font-bold px-2 py-0.5 rounded">Condicionamento</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-4 pt-4 border-t border-brand-border text-center">
+                                <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Quero%20consultar%20a%20grade%20de%20horários%20da%20Android%20Fight" 
+                                   target="_blank"
+                                   class="text-xs text-brand-orange hover:text-white font-bold inline-flex items-center gap-1 transition">
+                                    Consultar Grade Completa de Horários via WhatsApp <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: LEMBRETE E COBRANÇA NO DIA DA MATRÍCULA (REQUISITO PRINCIPAL) -->
+        <section id="lembrete" class="py-16 bg-neutral-950 border-y border-brand-border relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold text-brand-orange tracking-widest uppercase bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
+                        Gestão Transparente & Sem Surpresas
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white uppercase mt-3">
+                        Lembrete & Controle de Vencimento
+                    </h2>
+                    <p class="text-gray-400 mt-2 text-sm sm:text-base">
+                        Na <strong>Android Fight</strong>, sua cobrança mensal é contada exatamente a partir do <span class="text-white font-semibold">dia da sua matrícula</span>. Configure seu plano abaixo para simular datas, calcular o próximo vencimento e ativar notificações no seu WhatsApp ou calendário!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Formulário Interativo -->
+                    <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 shadow-xl">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-brand-orange"></i> Simular e Configurar Lembrete
+                        </h3>
+
+                        <form id="reminderForm" class="space-y-5" onsubmit="event.preventDefault(); updateReminder();">
+                            <!-- Nome do Aluno -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                    Nome do Aluno ou Dependente (Kids):
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-500">
+                                        <i class="fa-regular fa-user"></i>
+                                    </span>
+                                    <input type="text" id="studentName" required placeholder="Ex: Arthur Silva / Família Silva" 
+                                           class="w-full bg-neutral-900 border border-brand-border rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <!-- Modalidade -->
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                        Modalidade Escolhida:
+                                    </label>
+                                    <select id="planCategory" class="w-full bg-neutral-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
+                                        <option value="Jiu-Jitsu Kids">Jiu-Jitsu Kids</option>
+                                        <option value="Boxe Kids">Boxe Kids</option>
+                                        <option value="Karatê Kids">Karatê Kids</option>
+                                        <option value="Muay Thai Adulto" selected>Muay Thai Adulto</option>
+                                        <option value="Jiu-Jitsu Adulto">Jiu-Jitsu Adulto</option>
+                                        <option value="Boxe Adulto">Boxe Adulto</option>
+                                        <option value="Sanda (Boxe Chinês)">Sanda (Boxe Chinês)</option>
+                                        <option value="Crosstrainer & Funcional">Crosstrainer & Funcional</option>
+                                        <option value="Combo Família / Casal">Combo Família / Multi-Modalidade</option>
+                                    </select>
+                                </div>
+
+                                <!-- Dia da Matrícula (Data Base) -->
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                        Dia da Matrícula / Início:
+                                    </label>
+                                    <input type="date" id="enrollmentDate" required 
+                                           class="w-full bg-neutral-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
+                                </div>
+                            </div>
+
+                            <!-- Forma de Pagamento Preferida -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                    Previsão de Pagamento:
+                                </label>
+                                <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
+                                        <input type="radio" name="payMethod" value="PIX Instantâneo" checked class="hidden">
+                                        <i class="fa-brands fa-pix block text-base mb-1"></i> PIX
+                                    </label>
+                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
+                                        <input type="radio" name="payMethod" value="Cartão de Crédito/Débito" class="hidden">
+                                        <i class="fa-solid fa-credit-card block text-base mb-1"></i> Cartão
+                                    </label>
+                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
+                                        <input type="radio" name="payMethod" value="Dinheiro / Recepção" class="hidden">
+                                        <i class="fa-solid fa-money-bill-wave block text-base mb-1"></i> Na Recepção
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3.5 rounded-xl font-bold tracking-wide transition flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/20">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span>Calcular & Atualizar Próxima Cobrança</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Cartão de Status & Ações do Lembrete -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-gradient-to-br from-neutral-900 to-black border-2 border-brand-orange/40 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden">
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs uppercase font-bold tracking-wider text-brand-orange flex items-center gap-1.5">
+                                    <i class="fa-regular fa-calendar-check"></i> Próxima Renovação
+                                </span>
+                                <span id="statusBadge" class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                                    Matrícula Ativa
+                                </span>
+                            </div>
+
+                            <div class="space-y-1 mb-5">
+                                <div id="displayStudent" class="text-2xl font-black text-white">Aluno(a) Cadastrado(a)</div>
+                                <div id="displayPlan" class="text-sm font-semibold text-brand-orange">Muay Thai Adulto</div>
+                            </div>
+
+                            <!-- Contador e Data -->
+                            <div class="bg-neutral-900/90 rounded-xl p-4 border border-brand-border mb-6">
+                                <div class="text-xs text-gray-400 uppercase font-semibold">Data da Próxima Cobrança:</div>
+                                <div id="displayDueDate" class="text-2xl font-black text-white mt-1">--/--/----</div>
+                                <div id="countdownBox" class="mt-2 text-xs font-semibold text-yellow-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-clock"></i> <span id="daysRemainingText">Calculando dias restantes...</span>
+                                </div>
+                            </div>
+
+                            <!-- Botões de Ação Direta -->
+                            <div class="space-y-3">
+                                <!-- Enviar Lembrete no WhatsApp da Academia / Próprio -->
+                                <button type="button" onclick="sendWhatsAppBillingAlert()" 
+                                        class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    <span>Notificar / Confirmar no WhatsApp</span>
+                                </button>
+
+                                <!-- Baixar / Criar Evento de Calendário (.ics) -->
+                                <button type="button" onclick="downloadCalendarReminder()" 
+                                        class="w-full bg-neutral-800 hover:bg-neutral-700 text-gray-200 border border-brand-border font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition">
+                                    <i class="fa-solid fa-calendar-plus text-brand-orange"></i>
+                                    <span>Adicionar Alarme no Google / Apple Calendar</span>
+                                </button>
+                            </div>
+
+                            <p class="text-[11px] text-gray-400 mt-4 text-center">
+                                * Cobrança amigável: Enviamos mensagens cordiais para você nunca perder seus treinos ou graduações!
+                            </p>
+                        </div>
+
+                        <!-- Mini FAQ da Cobrança -->
+                        <div class="bg-brand-card/80 border border-brand-border rounded-xl p-4 text-xs space-y-2 text-gray-300">
+                            <div class="font-bold text-white flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-info text-brand-orange"></i> Como funciona a data de vencimento?
+                            </div>
+                            <p>
+                                Seu vencimento mensal cai sempre no mesmo dia em que você fez sua matrícula inicial. Exemplo: se iniciou no <strong>dia 10</strong>, sua renovação será todo <strong>dia 10</strong>, garantindo ciclo completo de 30 dias de treinos.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO: MODALIDADES PRINCIPAIS -->
+        <section id="modalidades" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs font-bold text-brand-orange tracking-widest uppercase">Grade Completa</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white uppercase mt-1">Treinos Adulto & Força</h2>
+                </div>
+                <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">
+                    Treinamentos elaborados para queima calórica, técnica apurada de combate, autodefesa e resistência extrema.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Muay Thai -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-hand-fist"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Muay Thai</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        A arte das oito armas: socos, cotovelos, joelhos e chutes. Melhora o condicionamento cardiovascular, flexibilidade e tônus muscular.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-regular fa-clock text-brand-orange mr-1"></i> 60 min</span>
+                        <span class="text-brand-orange font-bold">Alta Intensidade</span>
+                    </div>
+                </div>
+
+                <!-- Jiu-Jitsu Adulto -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-ribbon"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Jiu-Jitsu</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        Luta de solo, alavancas, raspagens e finalizações. Desenvolve raciocínio tático sob pressão, resistência e defesa pessoal inteligente.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-solid fa-graduation-cap text-brand-orange mr-1"></i> Com Graduação</span>
+                        <span class="text-brand-orange font-bold">Técnico & Físico</span>
+                    </div>
+                </div>
+
+                <!-- Boxe -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-mitten"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Boxe</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        A nobre arte dos punhos. Esquivas, jogo de pernas, ritmo e potência muscular com alto gasto calórico para desestressar o dia a dia.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-solid fa-heart-pulse text-brand-orange mr-1"></i> Agilidade Pura</span>
+                        <span class="text-brand-orange font-bold">Coordenação</span>
+                    </div>
+                </div>
+
+                <!-- Sanda (Boxe Chinês) -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Sanda (Boxe Chinês)</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        Combinação dinâmica de socos, chutes rápidos e técnicas eficientes de projeções e quedas. Um treino completo para o corpo todo.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-solid fa-shield text-brand-orange mr-1"></i> Quedas & Combate</span>
+                        <span class="text-brand-orange font-bold">Dinâmico</span>
+                    </div>
+                </div>
+
+                <!-- Karatê Adulto -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Karatê Tradicional</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        Katas, postura, golpes retos e desenvolvimento mental de disciplina marcial com rigor técnico e respeito à tradição.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-solid fa-award text-brand-orange mr-1"></i> Disciplina</span>
+                        <span class="text-brand-orange font-bold">Foco Total</span>
+                    </div>
+                </div>
+
+                <!-- Crosstrainer & Funcional -->
+                <div class="bg-brand-card border-2 border-brand-orange/40 rounded-2xl p-6 hover:border-brand-orange transition group relative">
+                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-[10px] uppercase font-black px-2 py-0.5 rounded">Destaque</span>
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Crosstrainer & Funcional</h3>
+                    <p class="text-gray-400 text-sm mt-2">
+                        Circuitos com barras, pesos, cordas e esteiras para ganho de força, aceleração metabólica e resistência física sem rotina monótona.
+                    </p>
+                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fa-solid fa-gauge-high text-brand-orange mr-1"></i> Circuito Metabólico</span>
+                        <span class="text-brand-orange font-bold">Sem Rotina</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO ESPECIAL: ESPAÇO KIDS (Destaque do banner e da solicitação) -->
+        <section id="kids" class="py-20 bg-neutral-900 border-t border-brand-border relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <div class="bg-gradient-to-r from-orange-600/20 via-brand-card to-neutral-900 border border-brand-orange/40 rounded-3xl p-8 sm:p-12 mb-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-4">
+                            <span class="bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                Espaço Kids Android Fight
+                            </span>
+                            <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+                                Disciplina, Respeito e Diversão Saudável para Seus Filhos!
+                            </h2>
+                            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                                Nossas turmas infantis não ensinam violência; ensinam <strong class="text-white">autocontrole emocional, foco escolar, postura, coordenação motora e respeito aos pais e colegas</strong>. Ambiente acolhedor de bairro com professores dedicados.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                            <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Tenho%20interesse%20em%20agendar%20uma%20aula%20experimental%20KIDS%20para%20meu%20filho(a)!"
+                               target="_blank"
+                               class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-4 rounded-2xl font-black text-base shadow-xl shadow-brand-orange/30 text-center flex flex-col items-center gap-1 hover:scale-105 transition">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-child-reaching text-xl"></i> Agendar Aula Kids</span>
+                                <span class="text-xs font-normal text-orange-100">1ª Aula é 100% Gratuita</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Pilares Kids -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Jiu-Jitsu Kids -->
+                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
+                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
+                            Tatame Lúdico
+                        </span>
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-white uppercase">Jiu-Jitsu Kids</h3>
+                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Ajuda na timidez e socialização</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Noções práticas de antibullying</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Coordenação e equilíbrio motor</li>
+                        </ul>
+                    </div>
+
+                    <!-- Boxe Kids -->
+                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
+                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
+                            Agilidade
+                        </span>
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-white uppercase">Boxe Kids</h3>
+                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Gasto sadio de energia acumulada</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Reflexos rápidos e consciência corporal</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Foco e atenção aos comandos do mestre</li>
+                        </ul>
+                    </div>
+
+                    <!-- Karatê Kids -->
+                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
+                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
+                            Disciplina
+                        </span>
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-white uppercase">Karatê Kids</h3>
+                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Respeito aos mais velhos e disciplina</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Postura firme e concentração escolar</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Sistema de faixas motivacional</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO: REGRAS E POLÍTICA DE MATRÍCULA -->
+        <section id="regras" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-widest">Compromisso Android Fight</span>
+                <h2 class="text-3xl font-black text-white uppercase mt-1">Como Funciona a Cobrança no Dia da Matrícula</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">1</div>
+                    <h4 class="font-bold text-white text-base mb-2">Dia Fixo Personalizado</h4>
+                    <p class="text-xs text-gray-400">Você escolhe o dia em que vai entrar. Sua data de renovação será sempre calculada exatamente a cada 30 dias a partir da data de adesão.</p>
+                </div>
+
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">2</div>
+                    <h4 class="font-bold text-white text-base mb-2">Lembrete Prévio no WhatsApp</h4>
+                    <p class="text-xs text-gray-400">3 dias antes do vencimento, enviamos um aviso amigável pelo WhatsApp para facilitar seu planejamento e envio do comprovante PIX.</p>
+                </div>
+
+                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
+                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">3</div>
+                    <h4 class="font-bold text-white text-base mb-2">Sem Multas Abusivas</h4>
+                    <p class="text-xs text-gray-400">Academia familiar de bairro! Teve um imprevisto? Basta nos avisar no WhatsApp para alinharmos sem burocracia.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: FORMULÁRIO RÁPIDO DE EXPERIMENTAL / CONTATO -->
+        <section id="contato" class="py-16 bg-neutral-950 border-t border-brand-border">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-brand-card border border-brand-border rounded-3xl p-8 sm:p-10 shadow-2xl text-center">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-orange/10 border border-brand-orange/30 text-brand-orange flex items-center justify-center text-3xl mx-auto mb-4">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h2 class="text-3xl font-black text-white uppercase">Venha Fazer Parte da Família Android Fight</h2>
+                    <p class="text-gray-400 text-sm max-w-xl mx-auto mt-2 mb-8">
+                        Entre em contato diretamente com nossa recepção pelo WhatsApp oficial. Tire dúvidas sobre combos para pais e filhos e garanta sua vaga.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Quero%20fazer%20minha%20matrícula%20na%20Android%20Fight"
+                           target="_blank"
+                           class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-8 py-4 rounded-xl flex items-center gap-3 shadow-lg shadow-emerald-600/30 transition text-base">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>Falar no WhatsApp: (86) 99572-9225</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé Completo -->
+    <footer class="bg-black border-t border-brand-border py-10 text-gray-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <div class="flex items-center justify-center md:justify-start gap-2 text-white font-black text-lg">
+                    <span class="text-brand-orange">ANDROID</span> FIGHT
+                </div>
+                <p class="mt-1 text-gray-400">Artes Marciais, Boxe, Jiu-Jitsu Kids & Adulto, Karatê e Cross Training.</p>
+            </div>
+            <div>
+                <p class="text-gray-400">Atendimento e Matrículas:</p>
+                <a href="tel:86995729225" class="text-brand-orange font-bold text-sm hover:underline">(86) 99572-9225</a>
+            </div>
+            <div class="text-gray-500">
+                &copy; <span id="currentYear"></span> Android Fight. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de Gestão de Lembrete e Contagem Regressiva -->
+    <script>
+        // Data atual como padrão no input
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        
+        document.getElementById('enrollmentDate').value = `${year}-${month}-${day}`;
+        document.getElementById('currentYear').textContent = year;
+
+        // Variável de estado global do lembrete
+        let currentReminderData = {
+            student: 'Aluno(a)',
+            plan: 'Muay Thai Adulto',
+            enrollmentDateStr: `${year}-${month}-${day}`,
+            dueDate: new Date(),
+            paymentMethod: 'PIX Instantâneo'
+        };
+
+        function calculateNextDue(enrollDate) {
+            const nextDue = new Date(enrollDate);
+            // Próximo vencimento 1 mês após a data indicada
+            nextDue.setMonth(nextDue.getMonth() + 1);
+            return nextDue;
+        }
+
+        function updateReminder() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            const planInput = document.getElementById('planCategory').value;
+            const dateInput = document.getElementById('enrollmentDate').value;
+            const paySelected = document.querySelector('input[name="payMethod"]:checked')?.value || 'PIX Instantâneo';
+
+            const studentName = nameInput || 'Aluno(a)';
+            const parsedEnrollDate = new Date(dateInput + 'T00:00:00');
+            const nextDueDate = calculateNextDue(parsedEnrollDate);
+
+            currentReminderData = {
+                student: studentName,
+                plan: planInput,
+                enrollmentDateStr: dateInput,
+                dueDate: nextDueDate,
+                paymentMethod: paySelected
+            };
+
+            // Atualiza Interface
+            document.getElementById('displayStudent').textContent = studentName;
+            document.getElementById('displayPlan').textContent = planInput;
+            
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = nextDueDate.toLocaleDateString('pt-BR', options);
+            document.getElementById('displayDueDate').textContent = formattedDate;
+
+            // Calcula dias restantes
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            const diffTime = nextDueDate.getTime() - now.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            const countdownElem = document.getElementById('daysRemainingText');
+            const statusBadge = document.getElementById('statusBadge');
+
+            if (diffDays > 0) {
+                countdownElem.textContent = `Faltam ${diffDays} dias para o próximo vencimento da matrícula.`;
+                statusBadge.className = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
+                statusBadge.textContent = 'Em Dia';
+            } else if (diffDays === 0) {
+                countdownElem.textContent = 'Atenção: O dia da renovação da sua matrícula é HOJE!';
+                statusBadge.className = 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
+                statusBadge.textContent = 'Vence Hoje';
+            } else {
+                countdownElem.textContent = `Vencimento ultrapassado há ${Math.abs(diffDays)} dias. Favor regularizar na recepção.`;
+                statusBadge.className = 'bg-red-500/10 text-red-400 border border-red-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
+                statusBadge.textContent = 'Pendente';
+            }
+        }
+
+        // Enviar mensagem pronta para WhatsApp (86) 99572-9225
+        function sendWhatsAppBillingAlert() {
+            const formattedDate = currentReminderData.dueDate.toLocaleDateString('pt-BR');
+            const message = `🥊 *LEMBRETE DE MATRÍCULA - ACADEMIA ANDROID FIGHT*%0A%0A` +
+                `👤 *Aluno(a):* ${encodeURIComponent(currentReminderData.student)}%0A` +
+                `🥋 *Modalidade:* ${encodeURIComponent(currentReminderData.plan)}%0A` +
+                `📅 *Data de Cobrança / Renovação:* ${formattedDate}%0A` +
+                `💳 *Previsão de Pagamento:* ${encodeURIComponent(currentReminderData.paymentMethod)}%0A%0A` +
+                `Olá equipe Android Fight, gostaria de confirmar a renovação da minha matrícula para mantermos os treinos em dia! OSS!`;
+
+            const url = `https://api.whatsapp.com/send?phone=5586995729225&text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        // Gerar arquivo .ics de calendário para alarme automático no celular
+        function downloadCalendarReminder() {
+            const d = currentReminderData.dueDate;
+            const yearStr = d.getFullYear();
+            const monthStr = String(d.getMonth() + 1).padStart(2, '0');
+            const dayStr = String(d.getDate()).padStart(2, '0');
+            const dateIcs = `${yearStr}${monthStr}${dayStr}`;
+
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Android Fight//Lembrete de Matricula//PT',
+                'BEGIN:VEVENT',
+                `SUMMARY:🥊 Renovação Matrícula Android Fight (${currentReminderData.student})`,
+                `DESCRIPTION:Dia da cobrança da matrícula na Android Fight. Modalidade: ${currentReminderData.plan}. Contato WhatsApp: (86) 99572-9225`,
+                `DTSTART;VALUE=DATE:${dateIcs}`,
+                `DTEND;VALUE=DATE:${dateIcs}`,
+                'STATUS:CONFIRMED',
+                'BEGIN:VALARM',
+                'TRIGGER:-P1D',
+                'ACTION:DISPLAY',
+                'DESCRIPTION:Lembrete de Cobrança da Matrícula Android Fight amanhã!',
+                'END:VALARM',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', `matricula-android-fight-${dateIcs}.ics`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Inicializa o cálculo na abertura
+        window.addEventListener('DOMContentLoaded', () => {
+            updateReminder();
+        });
+    </script>
+</body>
+</html>
