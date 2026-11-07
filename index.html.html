@@ -1,786 +1,883 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia Android Fight | Força, Disciplina & Família</title>
-    <!-- Tailwind CSS -->
+    <title>Android Fight - Painel de Gestão de Alunos & Cobrança</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            orange: '#FF5E00',
-                            orangeHover: '#E04F00',
-                            dark: '#0D0D0E',
-                            card: '#161618',
-                            border: '#27272A',
-                            accent: '#FF7E26'
+                        af: {
+                            dark: '#0B0F19',
+                            darker: '#060911',
+                            card: '#111827',
+                            border: '#1F2937',
+                            orange: '#F97316',
+                            orangeHover: '#EA580C',
+                            muted: '#9CA3AF'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        display: ['Impact', 'Arial Black', 'sans-serif']
+                        sans: ['Inter', 'system-ui', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Estilos e Efeitos Customizados */
-        .text-glow {
-            text-shadow: 0 0 25px rgba(255, 94, 0, 0.45);
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-        .border-glow:hover {
-            box-shadow: 0 0 20px rgba(255, 94, 0, 0.35);
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0b0f19;
         }
-        .grain-bg {
-            background-color: #0b0b0c;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 94, 0, 0.08) 0%, transparent 40%),
-                              radial-gradient(circle at 90% 80%, rgba(255, 94, 0, 0.05) 0%, transparent 35%);
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 9999px;
         }
-        .badge-kids {
-            background: linear-gradient(135deg, #FF7E26, #E04F00);
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
         }
     </style>
 </head>
-<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-orange selection:text-white">
+<body class="bg-af-darker text-gray-100 font-sans min-h-full flex flex-col antialiased">
 
-    <!-- Top Info Bar -->
-    <div class="bg-neutral-900 border-b border-brand-border text-xs py-2 px-4 text-center sm:text-left flex flex-wrap justify-between items-center gap-2 max-w-7xl mx-auto">
-        <div class="flex items-center gap-4 mx-auto sm:mx-0 text-gray-400">
-            <span><i class="fa-solid fa-location-dot text-brand-orange mr-1.5"></i> Academia de Bairro & Tatame Comunitário</span>
-            <span class="hidden md:inline"><i class="fa-solid fa-clock text-brand-orange mr-1.5"></i> Segunda a Sábado</span>
-        </div>
-        <div class="mx-auto sm:mx-0 flex items-center gap-3">
-            <span class="text-gray-400">Fale Conosco:</span>
-            <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20treinos%20da%20Android%20Fight" 
-               target="_blank" 
-               class="text-brand-orange hover:text-white transition flex items-center font-bold">
-                <i class="fa-brands fa-whatsapp text-sm mr-1"></i> (86) 99572-9225
-            </a>
-        </div>
-    </div>
-
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-brand-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-orange to-red-600 flex items-center justify-center text-white shadow-lg shadow-brand-orange/30 group-hover:scale-105 transition">
-                    <i class="fa-solid fa-dumbbell text-xl"></i>
+    <!-- Top Navigation Bar -->
+    <header class="bg-af-card border-b border-af-border sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Brand / Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-af-orange to-red-600 flex items-center justify-center text-white shadow-lg shadow-af-orange/20">
+                        <i class="fa-solid fa-dumbbell text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-lg sm:text-2xl font-black tracking-wider text-white">ANDROID</span>
+                            <span class="text-lg sm:text-2xl font-black tracking-wider text-af-orange">FIGHT</span>
+                            <span class="text-[10px] bg-af-orange/20 text-af-orange px-2 py-0.5 rounded font-bold uppercase tracking-wider hidden sm:inline-block">Gestão CT</span>
+                        </div>
+                        <p class="text-xs text-af-muted hidden sm:block">Controle de Matrículas, Cobranças e Alunos Kids & Adultos</p>
+                    </div>
                 </div>
-                <div>
-                    <span class="text-2xl font-black tracking-wider text-white flex items-center">
-                        ANDROID<span class="text-brand-orange ml-1">FIGHT</span>
-                    </span>
-                    <span class="text-[10px] tracking-widest uppercase text-gray-400 block font-semibold">CT & Artes Marciais</span>
+
+                <!-- Contact & Action -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="text-right hidden md:block">
+                        <span class="text-[11px] uppercase tracking-wider text-af-muted font-semibold block">WhatsApp da Recepção</span>
+                        <a href="https://wa.me/5586995729225" target="_blank" class="text-sm font-bold text-af-orange hover:text-white transition flex items-center justify-end gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> (86) 99572-9225
+                        </a>
+                    </div>
+                    
+                    <button onclick="openStudentModal()" class="bg-af-orange hover:bg-af-orangeHover text-white px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-af-orange/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+                        <i class="fa-solid fa-user-plus text-xs sm:text-sm"></i>
+                        <span>Novo Aluno</span>
+                    </button>
                 </div>
-            </a>
-
-            <!-- Desktop Navigation -->
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-300">
-                <a href="#modalidades" class="hover:text-brand-orange transition">Modalidades</a>
-                <a href="#kids" class="hover:text-brand-orange text-orange-400 flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-shield-cat text-xs"></i> Espaço Kids
-                </a>
-                <a href="#lembrete" class="hover:text-brand-orange transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-bell text-xs text-brand-orange"></i> Lembrete de Matrícula
-                </a>
-                <a href="#regras" class="hover:text-brand-orange transition">Como Funciona</a>
-                <a href="#contato" class="hover:text-brand-orange transition">Contato</a>
-            </nav>
-
-            <!-- CTA Button -->
-            <div class="flex items-center gap-3">
-                <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Vim%20pelo%20site%20e%20quero%20agendar%20minha%20AULA%20EXPERIMENTAL%20grátis!"
-                   target="_blank"
-                   class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg shadow-brand-orange/20 transition flex items-center gap-2 hover:-translate-y-0.5">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Agendar Aula Grátis</span>
-                </a>
             </div>
         </div>
     </header>
 
-    <main class="grain-bg">
-        <!-- Hero Section -->
-        <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
-                            Treinos para Todas as Idades • Do Bairro para o Ringue
-                        </div>
+    <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
 
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white uppercase leading-none">
-                            Construa sua <span class="text-brand-orange text-glow">melhor versão</span> dentro e fora do tatame.
-                        </h1>
-
-                        <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0">
-                            A <strong class="text-gray-200">Android Fight</strong> une artes marciais de alta performance, condicionamento físico funcional e formação esportiva infantil em um ambiente familiar, motivador e acessível.
-                        </p>
-
-                        <!-- Highlights list -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-left">
-                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl">
-                                <i class="fa-solid fa-users text-brand-orange mb-1 text-lg"></i>
-                                <div class="font-bold text-sm text-white">Turmas Kids & Adulto</div>
-                                <div class="text-xs text-gray-400">Do iniciante ao avançado</div>
-                            </div>
-                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl">
-                                <i class="fa-solid fa-heart-pulse text-brand-orange mb-1 text-lg"></i>
-                                <div class="font-bold text-sm text-white">Cross Training</div>
-                                <div class="text-xs text-gray-400">Queima e fortalecimento</div>
-                            </div>
-                            <div class="bg-brand-card/70 border border-brand-border p-3 rounded-xl col-span-2 sm:col-span-1">
-                                <i class="fa-solid fa-calendar-check text-brand-orange mb-1 text-lg"></i>
-                                <div class="font-bold text-sm text-white">Cobrança Justa</div>
-                                <div class="text-xs text-gray-400">Vencimento na sua data</div>
-                            </div>
-                        </div>
-
-                        <!-- CTA Row -->
-                        <div class="pt-4 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                            <a href="#lembrete" class="bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-white px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition">
-                                <i class="fa-solid fa-calculator text-brand-orange"></i>
-                                <span>Simulador & Lembrete de Matrícula</span>
-                            </a>
-                            <a href="#modalidades" class="text-gray-300 hover:text-white px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 border border-brand-border hover:border-brand-orange transition">
-                                Ver Modalidades
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Right Card Hero Visual -->
-                    <div class="lg:col-span-5 relative">
-                        <div class="relative bg-gradient-to-b from-brand-card to-black p-6 sm:p-8 rounded-3xl border border-brand-border shadow-2xl overflow-hidden border-glow transition duration-300">
-                            <div class="absolute -top-12 -right-12 w-48 h-48 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
-
-                            <div class="flex items-center justify-between pb-6 border-b border-brand-border">
-                                <div>
-                                    <span class="text-xs font-bold text-brand-orange uppercase">Quadro Oficial</span>
-                                    <h3 class="text-xl font-black text-white uppercase">Modalidades Ativas</h3>
-                                </div>
-                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1 border border-emerald-500/30">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Matrículas Abertas
-                                </span>
-                            </div>
-
-                            <ul class="divide-y divide-brand-border/60 text-sm py-4 space-y-2">
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-hand-fist text-brand-orange"></i> Muay Thai
-                                    </span>
-                                    <span class="text-xs bg-neutral-800 text-gray-300 px-2 py-0.5 rounded">Geral</span>
-                                </li>
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-ribbon text-brand-orange"></i> Jiu-Jitsu
-                                    </span>
-                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
-                                </li>
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-mitten text-brand-orange"></i> Boxe Tradicional
-                                    </span>
-                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
-                                </li>
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-user-ninja text-brand-orange"></i> Karatê
-                                    </span>
-                                    <span class="text-xs badge-kids text-white font-bold px-2 py-0.5 rounded">Infantil & Adulto</span>
-                                </li>
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-fire text-brand-orange"></i> Sanda (Boxe Chinês)
-                                    </span>
-                                    <span class="text-xs bg-neutral-800 text-gray-300 px-2 py-0.5 rounded">Técnica & Quedas</span>
-                                </li>
-                                <li class="flex items-center justify-between py-2">
-                                    <span class="font-semibold text-gray-200 flex items-center gap-2">
-                                        <i class="fa-solid fa-bolt text-brand-orange"></i> Crosstrainer & Funcional
-                                    </span>
-                                    <span class="text-xs bg-brand-orange/20 text-brand-orange font-bold px-2 py-0.5 rounded">Condicionamento</span>
-                                </li>
-                            </ul>
-
-                            <div class="mt-4 pt-4 border-t border-brand-border text-center">
-                                <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Quero%20consultar%20a%20grade%20de%20horários%20da%20Android%20Fight" 
-                                   target="_blank"
-                                   class="text-xs text-brand-orange hover:text-white font-bold inline-flex items-center gap-1 transition">
-                                    Consultar Grade Completa de Horários via WhatsApp <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
+        <!-- 1. DASHBOARD STATS -->
+        <section class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+            <!-- Ativos -->
+            <div class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-emerald-500/40 transition">
+                <div class="flex items-center justify-between text-af-muted text-xs font-semibold mb-2">
+                    <span>Alunos Ativos</span>
+                    <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
                 </div>
+                <div id="statActiveCount" class="text-2xl sm:text-3xl font-black text-white">0</div>
+                <div class="text-[11px] text-emerald-400 mt-1 font-medium flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> Treinando regularmente
+                </div>
+            </div>
+
+            <!-- Suspensos -->
+            <div class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-amber-500/40 transition">
+                <div class="flex items-center justify-between text-af-muted text-xs font-semibold mb-2">
+                    <span>Matrículas Suspensas</span>
+                    <i class="fa-solid fa-pause-circle text-amber-400 text-sm"></i>
+                </div>
+                <div id="statSuspendedCount" class="text-2xl sm:text-3xl font-black text-white">0</div>
+                <div class="text-[11px] text-amber-400 mt-1 font-medium flex items-center gap-1">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Férias ou atestados
+                </div>
+            </div>
+
+            <!-- Cancelados / Saíram -->
+            <div class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-red-500/40 transition">
+                <div class="flex items-center justify-between text-af-muted text-xs font-semibold mb-2">
+                    <span>Cancelados / Saíram</span>
+                    <i class="fa-solid fa-user-xmark text-red-400 text-sm"></i>
+                </div>
+                <div id="statCancelledCount" class="text-2xl sm:text-3xl font-black text-white">0</div>
+                <div class="text-[11px] text-red-400 mt-1 font-medium flex items-center gap-1">
+                    <i class="fa-solid fa-user-minus"></i> Oportunidade de resgate
+                </div>
+            </div>
+
+            <!-- Faturamento Mensal Previsto -->
+            <div class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-af-orange/40 transition col-span-2 sm:col-span-1">
+                <div class="flex items-center justify-between text-af-muted text-xs font-semibold mb-2">
+                    <span>Previsão do Mês</span>
+                    <i class="fa-solid fa-wallet text-af-orange text-sm"></i>
+                </div>
+                <div id="statTotalRevenue" class="text-xl sm:text-2xl font-black text-white">R$ 0,00</div>
+                <div class="text-[11px] text-af-muted mt-1 font-medium">Base ativa cadastrada</div>
+            </div>
+
+            <!-- Vencem Hoje ou Vencidas -->
+            <div class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-5 relative overflow-hidden group hover:border-rose-500/40 transition col-span-2 lg:col-span-1">
+                <div class="flex items-center justify-between text-af-muted text-xs font-semibold mb-2">
+                    <span>Cobranças Atenção</span>
+                    <i class="fa-solid fa-bell text-rose-400 text-sm animate-pulse"></i>
+                </div>
+                <div id="statDueAttentionCount" class="text-xl sm:text-2xl font-black text-rose-400">0</div>
+                <div class="text-[11px] text-rose-300 mt-1 font-medium">Vencidas ou vencem hoje</div>
             </div>
         </section>
 
-        <!-- SEÇÃO: LEMBRETE E COBRANÇA NO DIA DA MATRÍCULA (REQUISITO PRINCIPAL) -->
-        <section id="lembrete" class="py-16 bg-neutral-950 border-y border-brand-border relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 2. GESTÃO DE ALUNOS & FILTROS -->
+        <section class="bg-af-card border border-af-border rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+            
+            <!-- Barra Superior de Filtros e Busca -->
+            <div class="flex flex-col lg:flex-row gap-3 items-stretch lg:items-center justify-between">
                 
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="text-xs font-bold text-brand-orange tracking-widest uppercase bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
-                        Gestão Transparente & Sem Surpresas
+                <!-- Busca de Alunos -->
+                <div class="relative flex-1">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400 pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
                     </span>
-                    <h2 class="text-3xl sm:text-4xl font-black text-white uppercase mt-3">
-                        Lembrete & Controle de Vencimento
-                    </h2>
-                    <p class="text-gray-400 mt-2 text-sm sm:text-base">
-                        Na <strong>Android Fight</strong>, sua cobrança mensal é contada exatamente a partir do <span class="text-white font-semibold">dia da sua matrícula</span>. Configure seu plano abaixo para simular datas, calcular o próximo vencimento e ativar notificações no seu WhatsApp ou calendário!
-                    </p>
+                    <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Buscar por aluno, responsável ou telefone..." 
+                           class="w-full bg-af-dark border border-af-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-af-orange transition">
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
-                    <!-- Formulário Interativo -->
-                    <div class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-6 sm:p-8 shadow-xl">
-                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-brand-orange"></i> Simular e Configurar Lembrete
-                        </h3>
+                <!-- Filtros Dropdown / Categorias -->
+                <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                    <!-- Status Filter -->
+                    <select id="filterStatus" onchange="applyFilters()" class="bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-200 focus:outline-none focus:border-af-orange transition flex-1 sm:flex-none">
+                        <option value="ALL">Todos os Status</option>
+                        <option value="ATIVA">Apenas Ativas</option>
+                        <option value="SUSPENSA">Apenas Suspensas</option>
+                        <option value="CANCELADA">Apenas Canceladas</option>
+                    </select>
 
-                        <form id="reminderForm" class="space-y-5" onsubmit="event.preventDefault(); updateReminder();">
-                            <!-- Nome do Aluno -->
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                                    Nome do Aluno ou Dependente (Kids):
-                                </label>
-                                <div class="relative">
-                                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-500">
-                                        <i class="fa-regular fa-user"></i>
-                                    </span>
-                                    <input type="text" id="studentName" required placeholder="Ex: Arthur Silva / Família Silva" 
-                                           class="w-full bg-neutral-900 border border-brand-border rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
-                                </div>
-                            </div>
+                    <!-- Modalidade Filter -->
+                    <select id="filterModality" onchange="applyFilters()" class="bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-200 focus:outline-none focus:border-af-orange transition flex-1 sm:flex-none">
+                        <option value="ALL">Todas as Modalidades</option>
+                        <option value="Jiu-Jitsu Kids">Jiu-Jitsu Kids</option>
+                        <option value="Boxe Kids">Boxe Kids</option>
+                        <option value="Karatê Kids">Karatê Kids</option>
+                        <option value="Muay Thai Adulto">Muay Thai Adulto</option>
+                        <option value="Jiu-Jitsu Adulto">Jiu-Jitsu Adulto</option>
+                        <option value="Boxe Adulto">Boxe Adulto</option>
+                        <option value="Karatê Adulto">Karatê Adulto</option>
+                        <option value="Sanda (Boxe Chinês)">Sanda (Boxe Chinês)</option>
+                        <option value="Crosstrainer & Funcional">Crosstrainer & Funcional</option>
+                    </select>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <!-- Modalidade -->
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                                        Modalidade Escolhida:
-                                    </label>
-                                    <select id="planCategory" class="w-full bg-neutral-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
-                                        <option value="Jiu-Jitsu Kids">Jiu-Jitsu Kids</option>
-                                        <option value="Boxe Kids">Boxe Kids</option>
-                                        <option value="Karatê Kids">Karatê Kids</option>
-                                        <option value="Muay Thai Adulto" selected>Muay Thai Adulto</option>
-                                        <option value="Jiu-Jitsu Adulto">Jiu-Jitsu Adulto</option>
-                                        <option value="Boxe Adulto">Boxe Adulto</option>
-                                        <option value="Sanda (Boxe Chinês)">Sanda (Boxe Chinês)</option>
-                                        <option value="Crosstrainer & Funcional">Crosstrainer & Funcional</option>
-                                        <option value="Combo Família / Casal">Combo Família / Multi-Modalidade</option>
-                                    </select>
-                                </div>
+                    <!-- Categoria Kids/Adulto -->
+                    <select id="filterAudience" onchange="applyFilters()" class="bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-200 focus:outline-none focus:border-af-orange transition">
+                        <option value="ALL">Todos os Públicos</option>
+                        <option value="KIDS">Apenas Kids</option>
+                        <option value="ADULTO">Apenas Adultos</option>
+                    </select>
 
-                                <!-- Dia da Matrícula (Data Base) -->
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                                        Dia da Matrícula / Início:
-                                    </label>
-                                    <input type="date" id="enrollmentDate" required 
-                                           class="w-full bg-neutral-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition">
-                                </div>
-                            </div>
-
-                            <!-- Forma de Pagamento Preferida -->
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
-                                    Previsão de Pagamento:
-                                </label>
-                                <div class="grid grid-cols-3 gap-2 text-center text-xs">
-                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
-                                        <input type="radio" name="payMethod" value="PIX Instantâneo" checked class="hidden">
-                                        <i class="fa-brands fa-pix block text-base mb-1"></i> PIX
-                                    </label>
-                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
-                                        <input type="radio" name="payMethod" value="Cartão de Crédito/Débito" class="hidden">
-                                        <i class="fa-solid fa-credit-card block text-base mb-1"></i> Cartão
-                                    </label>
-                                    <label class="cursor-pointer border border-brand-border p-2.5 rounded-lg peer-checked:border-brand-orange has-[:checked]:border-brand-orange has-[:checked]:bg-brand-orange/10 has-[:checked]:text-brand-orange font-semibold transition">
-                                        <input type="radio" name="payMethod" value="Dinheiro / Recepção" class="hidden">
-                                        <i class="fa-solid fa-money-bill-wave block text-base mb-1"></i> Na Recepção
-                                    </label>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3.5 rounded-xl font-bold tracking-wide transition flex items-center justify-center gap-2 shadow-lg shadow-brand-orange/20">
-                                <i class="fa-solid fa-calculator"></i>
-                                <span>Calcular & Atualizar Próxima Cobrança</span>
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Cartão de Status & Ações do Lembrete -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <div class="bg-gradient-to-br from-neutral-900 to-black border-2 border-brand-orange/40 rounded-2xl p-6 sm:p-7 shadow-2xl relative overflow-hidden">
-                            
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="text-xs uppercase font-bold tracking-wider text-brand-orange flex items-center gap-1.5">
-                                    <i class="fa-regular fa-calendar-check"></i> Próxima Renovação
-                                </span>
-                                <span id="statusBadge" class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
-                                    Matrícula Ativa
-                                </span>
-                            </div>
-
-                            <div class="space-y-1 mb-5">
-                                <div id="displayStudent" class="text-2xl font-black text-white">Aluno(a) Cadastrado(a)</div>
-                                <div id="displayPlan" class="text-sm font-semibold text-brand-orange">Muay Thai Adulto</div>
-                            </div>
-
-                            <!-- Contador e Data -->
-                            <div class="bg-neutral-900/90 rounded-xl p-4 border border-brand-border mb-6">
-                                <div class="text-xs text-gray-400 uppercase font-semibold">Data da Próxima Cobrança:</div>
-                                <div id="displayDueDate" class="text-2xl font-black text-white mt-1">--/--/----</div>
-                                <div id="countdownBox" class="mt-2 text-xs font-semibold text-yellow-400 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-clock"></i> <span id="daysRemainingText">Calculando dias restantes...</span>
-                                </div>
-                            </div>
-
-                            <!-- Botões de Ação Direta -->
-                            <div class="space-y-3">
-                                <!-- Enviar Lembrete no WhatsApp da Academia / Próprio -->
-                                <button type="button" onclick="sendWhatsAppBillingAlert()" 
-                                        class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition">
-                                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                                    <span>Notificar / Confirmar no WhatsApp</span>
-                                </button>
-
-                                <!-- Baixar / Criar Evento de Calendário (.ics) -->
-                                <button type="button" onclick="downloadCalendarReminder()" 
-                                        class="w-full bg-neutral-800 hover:bg-neutral-700 text-gray-200 border border-brand-border font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition">
-                                    <i class="fa-solid fa-calendar-plus text-brand-orange"></i>
-                                    <span>Adicionar Alarme no Google / Apple Calendar</span>
-                                </button>
-                            </div>
-
-                            <p class="text-[11px] text-gray-400 mt-4 text-center">
-                                * Cobrança amigável: Enviamos mensagens cordiais para você nunca perder seus treinos ou graduações!
-                            </p>
-                        </div>
-
-                        <!-- Mini FAQ da Cobrança -->
-                        <div class="bg-brand-card/80 border border-brand-border rounded-xl p-4 text-xs space-y-2 text-gray-300">
-                            <div class="font-bold text-white flex items-center gap-1.5">
-                                <i class="fa-solid fa-circle-info text-brand-orange"></i> Como funciona a data de vencimento?
-                            </div>
-                            <p>
-                                Seu vencimento mensal cai sempre no mesmo dia em que você fez sua matrícula inicial. Exemplo: se iniciou no <strong>dia 10</strong>, sua renovação será todo <strong>dia 10</strong>, garantindo ciclo completo de 30 dias de treinos.
-                            </p>
-                        </div>
-                    </div>
-
+                    <!-- Reset Filtros -->
+                    <button onclick="resetFilters()" title="Limpar Filtros" class="p-2.5 text-gray-400 hover:text-white bg-af-dark border border-af-border rounded-xl hover:border-af-orange transition">
+                        <i class="fa-solid fa-arrow-rotate-left text-sm"></i>
+                    </button>
                 </div>
+            </div>
 
+            <!-- Tabela de Alunos -->
+            <div class="overflow-x-auto custom-scrollbar border border-af-border/60 rounded-xl">
+                <table class="w-full text-left text-xs sm:text-sm text-gray-300">
+                    <thead class="bg-af-dark text-[11px] uppercase tracking-wider text-af-muted border-b border-af-border">
+                        <tr>
+                            <th class="py-3.5 px-4 font-semibold">Aluno / Detalhes</th>
+                            <th class="py-3.5 px-4 font-semibold">Modalidade & Categoria</th>
+                            <th class="py-3.5 px-4 font-semibold">Vencimento & Mensalidade</th>
+                            <th class="py-3.5 px-4 font-semibold text-center">Status</th>
+                            <th class="py-3.5 px-4 font-semibold text-right">Ações Rápidas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody" class="divide-y divide-af-border/60">
+                        <!-- Linhas geradas via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Estado Vazio -->
+            <div id="emptyState" class="hidden py-12 text-center text-gray-500">
+                <i class="fa-regular fa-folder-open text-4xl mb-3 text-af-border"></i>
+                <p class="text-sm">Nenhum aluno encontrado com os filtros selecionados.</p>
+                <button onclick="openStudentModal()" class="mt-3 text-af-orange text-xs font-bold hover:underline">
+                    + Cadastrar Novo Aluno
+                </button>
             </div>
         </section>
 
-        <!-- SEÇÃO: MODALIDADES PRINCIPAIS -->
-        <section id="modalidades" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+    </div>
+
+    <!-- 3. MODAL DE CADASTRO E EDIÇÃO DE ALUNO -->
+    <div id="studentModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-af-card border border-af-border rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative my-8">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-af-border mb-5">
                 <div>
-                    <span class="text-xs font-bold text-brand-orange tracking-widest uppercase">Grade Completa</span>
-                    <h2 class="text-3xl sm:text-4xl font-black text-white uppercase mt-1">Treinos Adulto & Força</h2>
+                    <h3 id="modalTitle" class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-af-orange"></i> <span>Cadastrar Aluno</span>
+                    </h3>
+                    <p class="text-xs text-af-muted mt-0.5">Preencha os dados e a data de vencimento da mensalidade</p>
                 </div>
-                <p class="text-gray-400 text-sm max-w-md mt-2 md:mt-0">
-                    Treinamentos elaborados para queima calórica, técnica apurada de combate, autodefesa e resistência extrema.
-                </p>
+                <button onclick="closeStudentModal()" class="text-gray-400 hover:text-white p-2 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- Muay Thai -->
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-hand-fist"></i>
+            <form id="studentForm" onsubmit="handleSaveStudent(event)" class="space-y-4">
+                <input type="hidden" id="studentId">
+
+                <!-- Nome do Aluno -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                        Nome do Aluno *
+                    </label>
+                    <input type="text" id="formName" required placeholder="Ex: Arthur Carvalho" 
+                           class="w-full bg-af-dark border border-af-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                </div>
+
+                <!-- Categoria (Adulto / Kids) -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                            Público / Categoria *
+                        </label>
+                        <select id="formAudience" onchange="toggleKidsField()" class="w-full bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                            <option value="ADULTO">Adulto</option>
+                            <option value="KIDS">Kids (Infantil)</option>
+                        </select>
                     </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Muay Thai</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        A arte das oito armas: socos, cotovelos, joelhos e chutes. Melhora o condicionamento cardiovascular, flexibilidade e tônus muscular.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-regular fa-clock text-brand-orange mr-1"></i> 60 min</span>
-                        <span class="text-brand-orange font-bold">Alta Intensidade</span>
+
+                    <!-- Telefone WhatsApp -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                            WhatsApp (com DDD) *
+                        </label>
+                        <input type="text" id="formPhone" required placeholder="Ex: 86995729225" 
+                               class="w-full bg-af-dark border border-af-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
                     </div>
                 </div>
 
-                <!-- Jiu-Jitsu Adulto -->
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-ribbon"></i>
+                <!-- Campo Condicional: Responsável (se for Kids) -->
+                <div id="guardianContainer" class="hidden">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-af-orange mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-cat"></i> Nome do Responsável (Pai/Mãe) *
+                    </label>
+                    <input type="text" id="formGuardian" placeholder="Ex: Maria Carvalho (Mãe)" 
+                           class="w-full bg-af-dark border border-af-orange/40 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                </div>
+
+                <!-- Modalidade -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                        Modalidade Principal *
+                    </label>
+                    <select id="formModality" class="w-full bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                        <option value="Muay Thai Adulto">Muay Thai Adulto</option>
+                        <option value="Jiu-Jitsu Adulto">Jiu-Jitsu Adulto</option>
+                        <option value="Boxe Adulto">Boxe Adulto</option>
+                        <option value="Karatê Adulto">Karatê Adulto</option>
+                        <option value="Sanda (Boxe Chinês)">Sanda (Boxe Chinês)</option>
+                        <option value="Crosstrainer & Funcional">Crosstrainer & Funcional</option>
+                        <option value="Jiu-Jitsu Kids">Jiu-Jitsu Kids</option>
+                        <option value="Boxe Kids">Boxe Kids</option>
+                        <option value="Karatê Kids">Karatê Kids</option>
+                        <option value="Combo Multi-Modalidade">Combo Multi-Modalidade</option>
+                    </select>
+                </div>
+
+                <!-- Vencimento & Valor da Mensalidade -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                            Dia do Vencimento *
+                        </label>
+                        <input type="number" id="formDueDay" min="1" max="31" required placeholder="Ex: 10" 
+                               class="w-full bg-af-dark border border-af-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                        <span class="text-[10px] text-af-muted">Dia do mês (1 a 31)</span>
                     </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Jiu-Jitsu</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        Luta de solo, alavancas, raspagens e finalizações. Desenvolve raciocínio tático sob pressão, resistência e defesa pessoal inteligente.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-solid fa-graduation-cap text-brand-orange mr-1"></i> Com Graduação</span>
-                        <span class="text-brand-orange font-bold">Técnico & Físico</span>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                            Valor Mensal (R$) *
+                        </label>
+                        <input type="number" id="formFee" step="0.01" min="0" required placeholder="Ex: 120.00" 
+                               class="w-full bg-af-dark border border-af-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                        <span class="text-[10px] text-af-muted">Valor cobrado mensalmente</span>
                     </div>
                 </div>
 
-                <!-- Boxe -->
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-mitten"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Boxe</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        A nobre arte dos punhos. Esquivas, jogo de pernas, ritmo e potência muscular com alto gasto calórico para desestressar o dia a dia.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-solid fa-heart-pulse text-brand-orange mr-1"></i> Agilidade Pura</span>
-                        <span class="text-brand-orange font-bold">Coordenação</span>
-                    </div>
+                <!-- Status da Matrícula -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                        Status da Matrícula *
+                    </label>
+                    <select id="formStatus" class="w-full bg-af-dark border border-af-border rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-af-orange transition">
+                        <option value="ATIVA">Ativa (Treinando)</option>
+                        <option value="SUSPENSA">Suspensa (Trancada/Férias)</option>
+                        <option value="CANCELADA">Cancelada (Saiu)</option>
+                    </select>
                 </div>
 
-                <!-- Sanda (Boxe Chinês) -->
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-fire-flame-curved"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Sanda (Boxe Chinês)</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        Combinação dinâmica de socos, chutes rápidos e técnicas eficientes de projeções e quedas. Um treino completo para o corpo todo.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-solid fa-shield text-brand-orange mr-1"></i> Quedas & Combate</span>
-                        <span class="text-brand-orange font-bold">Dinâmico</span>
-                    </div>
+                <!-- Observação / Anotações -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
+                        Observações (Opcional)
+                    </label>
+                    <input type="text" id="formNotes" placeholder="Ex: Faixa azul, prefere pagar por PIX" 
+                           class="w-full bg-af-dark border border-af-border rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-af-orange transition">
                 </div>
 
-                <!-- Karatê Adulto -->
-                <div class="bg-brand-card border border-brand-border rounded-2xl p-6 hover:border-brand-orange/60 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-user-ninja"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Karatê Tradicional</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        Katas, postura, golpes retos e desenvolvimento mental de disciplina marcial com rigor técnico e respeito à tradição.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-solid fa-award text-brand-orange mr-1"></i> Disciplina</span>
-                        <span class="text-brand-orange font-bold">Foco Total</span>
-                    </div>
-                </div>
-
-                <!-- Crosstrainer & Funcional -->
-                <div class="bg-brand-card border-2 border-brand-orange/40 rounded-2xl p-6 hover:border-brand-orange transition group relative">
-                    <span class="absolute top-4 right-4 bg-brand-orange text-white text-[10px] uppercase font-black px-2 py-0.5 rounded">Destaque</span>
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-brand-orange flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-                        <i class="fa-solid fa-dumbbell"></i>
-                    </div>
-                    <h3 class="text-xl font-black text-white uppercase group-hover:text-brand-orange transition">Crosstrainer & Funcional</h3>
-                    <p class="text-gray-400 text-sm mt-2">
-                        Circuitos com barras, pesos, cordas e esteiras para ganho de força, aceleração metabólica e resistência física sem rotina monótona.
-                    </p>
-                    <div class="mt-4 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fa-solid fa-gauge-high text-brand-orange mr-1"></i> Circuito Metabólico</span>
-                        <span class="text-brand-orange font-bold">Sem Rotina</span>
+                <!-- Ações do Modal -->
+                <div class="flex items-center justify-between pt-4 border-t border-af-border gap-2">
+                    <button type="button" id="btnDeleteStudent" onclick="handleDeleteStudent()" class="hidden px-3 py-2 bg-red-600/10 text-red-400 hover:bg-red-600/20 border border-red-500/30 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-trash-can mr-1"></i> Excluir
+                    </button>
+                    <div class="flex items-center gap-2 ml-auto">
+                        <button type="button" onclick="closeStudentModal()" class="px-4 py-2.5 bg-af-dark hover:bg-af-border text-gray-300 rounded-xl text-xs sm:text-sm font-semibold transition">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="px-5 py-2.5 bg-af-orange hover:bg-af-orangeHover text-white rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-af-orange/20 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>Salvar Registro</span>
+                        </button>
                     </div>
                 </div>
+            </form>
+        </div>
+    </div>
 
+    <!-- 4. MODAL / DIALOG DE CONFIRMAÇÃO DE MUDANÇA RÁPIDA DE STATUS -->
+    <div id="quickStatusModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-af-card border border-af-border rounded-2xl max-w-sm w-full p-6 text-center space-y-4">
+            <div class="w-12 h-12 rounded-full bg-af-orange/10 text-af-orange flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-arrows-rotate"></i>
             </div>
-        </section>
-
-        <!-- SEÇÃO ESPECIAL: ESPAÇO KIDS (Destaque do banner e da solicitação) -->
-        <section id="kids" class="py-20 bg-neutral-900 border-t border-brand-border relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                
-                <div class="bg-gradient-to-r from-orange-600/20 via-brand-card to-neutral-900 border border-brand-orange/40 rounded-3xl p-8 sm:p-12 mb-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-8 space-y-4">
-                            <span class="bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
-                                Espaço Kids Android Fight
-                            </span>
-                            <h2 class="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-                                Disciplina, Respeito e Diversão Saudável para Seus Filhos!
-                            </h2>
-                            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                                Nossas turmas infantis não ensinam violência; ensinam <strong class="text-white">autocontrole emocional, foco escolar, postura, coordenação motora e respeito aos pais e colegas</strong>. Ambiente acolhedor de bairro com professores dedicados.
-                            </p>
-                        </div>
-                        <div class="lg:col-span-4 flex justify-center lg:justify-end">
-                            <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Tenho%20interesse%20em%20agendar%20uma%20aula%20experimental%20KIDS%20para%20meu%20filho(a)!"
-                               target="_blank"
-                               class="bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-4 rounded-2xl font-black text-base shadow-xl shadow-brand-orange/30 text-center flex flex-col items-center gap-1 hover:scale-105 transition">
-                                <span class="flex items-center gap-2"><i class="fa-solid fa-child-reaching text-xl"></i> Agendar Aula Kids</span>
-                                <span class="text-xs font-normal text-orange-100">1ª Aula é 100% Gratuita</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 Pilares Kids -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Jiu-Jitsu Kids -->
-                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
-                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
-                            Tatame Lúdico
-                        </span>
-                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <h3 class="text-xl font-black text-white uppercase">Jiu-Jitsu Kids</h3>
-                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Ajuda na timidez e socialização</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Noções práticas de antibullying</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Coordenação e equilíbrio motor</li>
-                        </ul>
-                    </div>
-
-                    <!-- Boxe Kids -->
-                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
-                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
-                            Agilidade
-                        </span>
-                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-bolt-lightning"></i>
-                        </div>
-                        <h3 class="text-xl font-black text-white uppercase">Boxe Kids</h3>
-                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Gasto sadio de energia acumulada</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Reflexos rápidos e consciência corporal</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Foco e atenção aos comandos do mestre</li>
-                        </ul>
-                    </div>
-
-                    <!-- Karatê Kids -->
-                    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 relative">
-                        <span class="badge-kids text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full absolute top-6 right-6">
-                            Disciplina
-                        </span>
-                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-brand-orange flex items-center justify-center text-xl mb-4">
-                            <i class="fa-solid fa-award"></i>
-                        </div>
-                        <h3 class="text-xl font-black text-white uppercase">Karatê Kids</h3>
-                        <ul class="text-xs text-gray-300 space-y-2.5 mt-4">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Respeito aos mais velhos e disciplina</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Postura firme e concentração escolar</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Sistema de faixas motivacional</li>
-                        </ul>
-                    </div>
-                </div>
-
+            <h4 class="text-base font-bold text-white">Alterar Status da Matrícula</h4>
+            <p id="quickStatusText" class="text-xs text-af-muted">Selecione o novo status para o aluno</p>
+            <div class="flex flex-col gap-2 pt-2">
+                <button onclick="applyQuickStatus('ATIVA')" class="py-2.5 px-4 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-check"></i> Ativar Matrícula
+                </button>
+                <button onclick="applyQuickStatus('SUSPENSA')" class="py-2.5 px-4 rounded-xl bg-amber-600/10 hover:bg-amber-600/20 text-amber-400 border border-amber-500/30 text-xs font-bold flex items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-pause"></i> Suspender / Trancar
+                </button>
+                <button onclick="applyQuickStatus('CANCELADA')" class="py-2.5 px-4 rounded-xl bg-red-600/10 hover:bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-bold flex items-center justify-center gap-2 transition">
+                    <i class="fa-solid fa-user-xmark"></i> Marcar como Cancelado (Saiu)
+                </button>
             </div>
-        </section>
+            <button onclick="closeQuickStatusModal()" class="text-xs text-gray-400 hover:text-white pt-2 block w-full">Voltar</button>
+        </div>
+    </div>
 
-        <!-- SEÇÃO: REGRAS E POLÍTICA DE MATRÍCULA -->
-        <section id="regras" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <span class="text-xs font-bold text-brand-orange uppercase tracking-widest">Compromisso Android Fight</span>
-                <h2 class="text-3xl font-black text-white uppercase mt-1">Como Funciona a Cobrança no Dia da Matrícula</h2>
-            </div>
+    <!-- Feedback Toast -->
+    <div id="toastMessage" class="fixed bottom-6 right-6 z-50 bg-af-card border border-af-orange text-white px-4 py-3 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold hidden items-center gap-2.5">
+        <i class="fa-solid fa-circle-check text-af-orange"></i>
+        <span id="toastText">Operação realizada com sucesso!</span>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">1</div>
-                    <h4 class="font-bold text-white text-base mb-2">Dia Fixo Personalizado</h4>
-                    <p class="text-xs text-gray-400">Você escolhe o dia em que vai entrar. Sua data de renovação será sempre calculada exatamente a cada 30 dias a partir da data de adesão.</p>
-                </div>
-
-                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">2</div>
-                    <h4 class="font-bold text-white text-base mb-2">Lembrete Prévio no WhatsApp</h4>
-                    <p class="text-xs text-gray-400">3 dias antes do vencimento, enviamos um aviso amigável pelo WhatsApp para facilitar seu planejamento e envio do comprovante PIX.</p>
-                </div>
-
-                <div class="bg-brand-card border border-brand-border rounded-xl p-6 text-center">
-                    <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-black flex items-center justify-center mx-auto mb-3">3</div>
-                    <h4 class="font-bold text-white text-base mb-2">Sem Multas Abusivas</h4>
-                    <p class="text-xs text-gray-400">Academia familiar de bairro! Teve um imprevisto? Basta nos avisar no WhatsApp para alinharmos sem burocracia.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO: FORMULÁRIO RÁPIDO DE EXPERIMENTAL / CONTATO -->
-        <section id="contato" class="py-16 bg-neutral-950 border-t border-brand-border">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-brand-card border border-brand-border rounded-3xl p-8 sm:p-10 shadow-2xl text-center">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-orange/10 border border-brand-orange/30 text-brand-orange flex items-center justify-center text-3xl mx-auto mb-4">
-                        <i class="fa-solid fa-trophy"></i>
-                    </div>
-                    <h2 class="text-3xl font-black text-white uppercase">Venha Fazer Parte da Família Android Fight</h2>
-                    <p class="text-gray-400 text-sm max-w-xl mx-auto mt-2 mb-8">
-                        Entre em contato diretamente com nossa recepção pelo WhatsApp oficial. Tire dúvidas sobre combos para pais e filhos e garanta sua vaga.
-                    </p>
-
-                    <div class="flex flex-wrap items-center justify-center gap-4">
-                        <a href="https://api.whatsapp.com/send?phone=5586995729225&text=Olá!%20Quero%20fazer%20minha%20matrícula%20na%20Android%20Fight"
-                           target="_blank"
-                           class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-8 py-4 rounded-xl flex items-center gap-3 shadow-lg shadow-emerald-600/30 transition text-base">
-                            <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            <span>Falar no WhatsApp: (86) 99572-9225</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Rodapé Completo -->
-    <footer class="bg-black border-t border-brand-border py-10 text-gray-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-            <div>
-                <div class="flex items-center justify-center md:justify-start gap-2 text-white font-black text-lg">
-                    <span class="text-brand-orange">ANDROID</span> FIGHT
-                </div>
-                <p class="mt-1 text-gray-400">Artes Marciais, Boxe, Jiu-Jitsu Kids & Adulto, Karatê e Cross Training.</p>
+    <!-- Footer -->
+    <footer class="bg-af-card border-t border-af-border py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-af-muted">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Academia Android Fight • Teresina / Piauí</span>
             </div>
             <div>
-                <p class="text-gray-400">Atendimento e Matrículas:</p>
-                <a href="tel:86995729225" class="text-brand-orange font-bold text-sm hover:underline">(86) 99572-9225</a>
-            </div>
-            <div class="text-gray-500">
-                &copy; <span id="currentYear"></span> Android Fight. Todos os direitos reservados.
+                WhatsApp Oficial de Cobrança: <strong class="text-white">(86) 99572-9225</strong>
             </div>
         </div>
     </footer>
 
-    <!-- Script de Gestão de Lembrete e Contagem Regressiva -->
+    <!-- JAVASCRIPT: LÓGICA COMPLETA DE DADOS, MENSALIDADES E COBRANÇA -->
     <script>
-        // Data atual como padrão no input
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        
-        document.getElementById('enrollmentDate').value = `${year}-${month}-${day}`;
-        document.getElementById('currentYear').textContent = year;
+        // Dados Iniciais Padrão para demonstração caso o LocalStorage esteja vazio
+        const INITIAL_STUDENTS = [
+            {
+                id: 'std_1',
+                name: 'Lucas Gabriel Martins',
+                audience: 'KIDS',
+                guardian: 'Carlos Martins (Pai)',
+                phone: '86995729225',
+                modality: 'Jiu-Jitsu Kids',
+                dueDay: 10,
+                monthlyFee: 120.00,
+                status: 'ATIVA',
+                notes: 'Treina terça e quinta às 17h'
+            },
+            {
+                id: 'std_2',
+                name: 'Sofia Rodrigues Ribeiro',
+                audience: 'KIDS',
+                guardian: 'Patrícia Ribeiro (Mãe)',
+                phone: '86995729225',
+                modality: 'Boxe Kids',
+                dueDay: 15,
+                monthlyFee: 110.00,
+                status: 'ATIVA',
+                notes: 'Adora os treinos de esquiva'
+            },
+            {
+                id: 'std_3',
+                name: 'Marcos Vinicius Andrade',
+                audience: 'ADULTO',
+                guardian: '',
+                phone: '86995729225',
+                modality: 'Muay Thai Adulto',
+                dueDay: 5,
+                monthlyFee: 130.00,
+                status: 'ATIVA',
+                notes: 'Prepara para graduação de prajied'
+            },
+            {
+                id: 'std_4',
+                name: 'Juliana Costa e Silva',
+                audience: 'ADULTO',
+                guardian: '',
+                phone: '86995729225',
+                modality: 'Crosstrainer & Funcional',
+                dueDay: 20,
+                monthlyFee: 140.00,
+                status: 'SUSPENSA',
+                notes: 'Matrícula trancada por 30 dias (viagem a trabalho)'
+            },
+            {
+                id: 'std_5',
+                name: 'Rafael Lima Nogueira',
+                audience: 'ADULTO',
+                guardian: '',
+                phone: '86995729225',
+                modality: 'Sanda (Boxe Chinês)',
+                dueDay: 1,
+                monthlyFee: 130.00,
+                status: 'CANCELADA',
+                notes: 'Mudou-se de bairro'
+            }
+        ];
 
-        // Variável de estado global do lembrete
-        let currentReminderData = {
-            student: 'Aluno(a)',
-            plan: 'Muay Thai Adulto',
-            enrollmentDateStr: `${year}-${month}-${day}`,
-            dueDate: new Date(),
-            paymentMethod: 'PIX Instantâneo'
-        };
+        const STORAGE_KEY = 'android_fight_students_db_v2';
+        let studentsList = [];
+        let activeStudentForQuickStatus = null;
 
-        function calculateNextDue(enrollDate) {
-            const nextDue = new Date(enrollDate);
-            // Próximo vencimento 1 mês após a data indicada
-            nextDue.setMonth(nextDue.getMonth() + 1);
-            return nextDue;
+        // Inicialização de Dados com LocalStorage
+        function loadStudents() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    studentsList = JSON.parse(stored);
+                } else {
+                    studentsList = [...INITIAL_STUDENTS];
+                    saveStudentsToStorage();
+                }
+            } catch (e) {
+                console.error('Erro ao ler LocalStorage', e);
+                studentsList = [...INITIAL_STUDENTS];
+            }
+            renderApp();
         }
 
-        function updateReminder() {
-            const nameInput = document.getElementById('studentName').value.trim();
-            const planInput = document.getElementById('planCategory').value;
-            const dateInput = document.getElementById('enrollmentDate').value;
-            const paySelected = document.querySelector('input[name="payMethod"]:checked')?.value || 'PIX Instantâneo';
-
-            const studentName = nameInput || 'Aluno(a)';
-            const parsedEnrollDate = new Date(dateInput + 'T00:00:00');
-            const nextDueDate = calculateNextDue(parsedEnrollDate);
-
-            currentReminderData = {
-                student: studentName,
-                plan: planInput,
-                enrollmentDateStr: dateInput,
-                dueDate: nextDueDate,
-                paymentMethod: paySelected
-            };
-
-            // Atualiza Interface
-            document.getElementById('displayStudent').textContent = studentName;
-            document.getElementById('displayPlan').textContent = planInput;
-            
-            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-            const formattedDate = nextDueDate.toLocaleDateString('pt-BR', options);
-            document.getElementById('displayDueDate').textContent = formattedDate;
-
-            // Calcula dias restantes
-            const now = new Date();
-            now.setHours(0, 0, 0, 0);
-            const diffTime = nextDueDate.getTime() - now.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            const countdownElem = document.getElementById('daysRemainingText');
-            const statusBadge = document.getElementById('statusBadge');
-
-            if (diffDays > 0) {
-                countdownElem.textContent = `Faltam ${diffDays} dias para o próximo vencimento da matrícula.`;
-                statusBadge.className = 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
-                statusBadge.textContent = 'Em Dia';
-            } else if (diffDays === 0) {
-                countdownElem.textContent = 'Atenção: O dia da renovação da sua matrícula é HOJE!';
-                statusBadge.className = 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
-                statusBadge.textContent = 'Vence Hoje';
-            } else {
-                countdownElem.textContent = `Vencimento ultrapassado há ${Math.abs(diffDays)} dias. Favor regularizar na recepção.`;
-                statusBadge.className = 'bg-red-500/10 text-red-400 border border-red-500/20 text-[11px] font-bold px-2.5 py-0.5 rounded-full';
-                statusBadge.textContent = 'Pendente';
+        function saveStudentsToStorage() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(studentsList));
+            } catch (e) {
+                console.error('Erro ao salvar no LocalStorage', e);
             }
         }
 
-        // Enviar mensagem pronta para WhatsApp (86) 99572-9225
-        function sendWhatsAppBillingAlert() {
-            const formattedDate = currentReminderData.dueDate.toLocaleDateString('pt-BR');
-            const message = `🥊 *LEMBRETE DE MATRÍCULA - ACADEMIA ANDROID FIGHT*%0A%0A` +
-                `👤 *Aluno(a):* ${encodeURIComponent(currentReminderData.student)}%0A` +
-                `🥋 *Modalidade:* ${encodeURIComponent(currentReminderData.plan)}%0A` +
-                `📅 *Data de Cobrança / Renovação:* ${formattedDate}%0A` +
-                `💳 *Previsão de Pagamento:* ${encodeURIComponent(currentReminderData.paymentMethod)}%0A%0A` +
-                `Olá equipe Android Fight, gostaria de confirmar a renovação da minha matrícula para mantermos os treinos em dia! OSS!`;
+        // Formatação de Moeda
+        function formatBRL(value) {
+            return Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
 
-            const url = `https://api.whatsapp.com/send?phone=5586995729225&text=${message}`;
+        // Cálculo e verificação de vencimento mensal
+        function getDueStatus(dueDay) {
+            const today = new Date();
+            const currentDay = today.getDate();
+            const dayNum = parseInt(dueDay, 10);
+
+            if (currentDay === dayNum) {
+                return { label: 'Vence Hoje', class: 'bg-amber-500/10 text-amber-400 border border-amber-500/20', isCritical: true };
+            } else if (currentDay > dayNum) {
+                const overdueDays = currentDay - dayNum;
+                return { label: `Venceu dia ${dayNum} (${overdueDays}d atrás)`, class: 'bg-rose-500/10 text-rose-400 border border-rose-500/20', isCritical: true };
+            } else {
+                const remainingDays = dayNum - currentDay;
+                return { label: `Vence em ${remainingDays} dias (Dia ${dayNum})`, class: 'bg-gray-800 text-gray-300 border border-gray-700', isCritical: false };
+            }
+        }
+
+        // Atualização dos Contadores do Dashboard
+        function updateDashboardStats() {
+            const active = studentsList.filter(s => s.status === 'ATIVA');
+            const suspended = studentsList.filter(s => s.status === 'SUSPENSA');
+            const cancelled = studentsList.filter(s => s.status === 'CANCELADA');
+
+            const totalRevenue = active.reduce((acc, curr) => acc + (parseFloat(curr.monthlyFee) || 0), 0);
+            
+            // Quantidade de matrículas ativas vencidas ou vencendo hoje
+            const attentionCount = active.filter(s => {
+                const status = getDueStatus(s.dueDay);
+                return status.isCritical;
+            }).length;
+
+            document.getElementById('statActiveCount').textContent = active.length;
+            document.getElementById('statSuspendedCount').textContent = suspended.length;
+            document.getElementById('statCancelledCount').textContent = cancelled.length;
+            document.getElementById('statTotalRevenue').textContent = formatBRL(totalRevenue);
+            document.getElementById('statDueAttentionCount').textContent = attentionCount;
+        }
+
+        // Renderização da Tabela de Alunos
+        function renderTable(studentsToRender) {
+            const tbody = document.getElementById('studentTableBody');
+            const emptyState = document.getElementById('emptyState');
+            tbody.innerHTML = '';
+
+            if (studentsToRender.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            studentsToRender.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-af-dark/50 transition border-b border-af-border/60';
+
+                // Badges de Status
+                let statusBadge = '';
+                if (student.status === 'ATIVA') {
+                    statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Ativa</span>`;
+                } else if (student.status === 'SUSPENSA') {
+                    statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Suspensa</span>`;
+                } else {
+                    statusBadge = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/30"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> Cancelada</span>`;
+                }
+
+                // Status de Vencimento
+                const dueInfo = getDueStatus(student.dueDay);
+
+                // Avatar com iniciais
+                const initials = student.name.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase() || 'AF';
+
+                tr.innerHTML = `
+                    <td class="py-4 px-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-af-dark border border-af-border flex items-center justify-center font-bold text-sm text-af-orange shrink-0">
+                                ${initials}
+                            </div>
+                            <div>
+                                <div class="font-bold text-white flex items-center gap-2">
+                                    <span>${escapeHtml(student.name)}</span>
+                                    ${student.audience === 'KIDS' ? '<span class="text-[10px] bg-af-orange text-white font-extrabold px-1.5 py-0.2 rounded">KIDS</span>' : ''}
+                                </div>
+                                ${student.guardian ? `<div class="text-[11px] text-gray-400 flex items-center gap-1 mt-0.5"><i class="fa-solid fa-user-shield text-[10px] text-af-orange"></i> Resp: ${escapeHtml(student.guardian)}</div>` : ''}
+                                <div class="text-[11px] text-af-muted flex items-center gap-1 mt-0.5">
+                                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> ${escapeHtml(student.phone)}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="font-semibold text-gray-200">${escapeHtml(student.modality)}</div>
+                        <div class="text-[11px] text-af-muted">${student.audience === 'KIDS' ? 'Formação Infantil' : 'Adulto / Geral'}</div>
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="font-black text-white">${formatBRL(student.monthlyFee)}</div>
+                        <div class="mt-1">
+                            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold ${dueInfo.class}">
+                                ${dueInfo.label}
+                            </span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4 text-center">
+                        <button onclick="openQuickStatusModal('${student.id}')" title="Clique para alterar status rapidamente" class="hover:scale-105 transition">
+                            ${statusBadge}
+                        </button>
+                    </td>
+                    <td class="py-4 px-4 text-right space-x-1 sm:space-x-1.5 whitespace-nowrap">
+                        <!-- Botão WhatsApp Cobrança / Lembrete -->
+                        <button onclick="sendBillingWhatsApp('${student.id}')" title="Enviar Lembrete de Matrícula no WhatsApp" class="p-2 bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold transition">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </button>
+
+                        <!-- Botão Editar Dados Completos -->
+                        <button onclick="openStudentModal('${student.id}')" title="Editar dados e valores" class="p-2 bg-af-dark hover:bg-af-border text-gray-300 hover:text-white border border-af-border rounded-lg text-xs font-bold transition">
+                            <i class="fa-solid fa-pen-to-square text-sm"></i>
+                        </button>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Filtros e Pesquisa
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase().trim();
+            const statusFilter = document.getElementById('filterStatus').value;
+            const modalityFilter = document.getElementById('filterModality').value;
+            const audienceFilter = document.getElementById('filterAudience').value;
+
+            const filtered = studentsList.filter(student => {
+                const matchSearch = student.name.toLowerCase().includes(search) || 
+                                    (student.guardian && student.guardian.toLowerCase().includes(search)) ||
+                                    student.phone.includes(search);
+
+                const matchStatus = statusFilter === 'ALL' || student.status === statusFilter;
+                const matchModality = modalityFilter === 'ALL' || student.modality === modalityFilter;
+                const matchAudience = audienceFilter === 'ALL' || student.audience === audienceFilter;
+
+                return matchSearch && matchStatus && matchModality && matchAudience;
+            });
+
+            renderTable(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('filterStatus').value = 'ALL';
+            document.getElementById('filterModality').value = 'ALL';
+            document.getElementById('filterAudience').value = 'ALL';
+            applyFilters();
+        }
+
+        // Exibição e controle do Modal
+        function toggleKidsField() {
+            const audience = document.getElementById('formAudience').value;
+            const container = document.getElementById('guardianContainer');
+            if (audience === 'KIDS') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+                document.getElementById('formGuardian').value = '';
+            }
+        }
+
+        function openStudentModal(id = null) {
+            const modal = document.getElementById('studentModal');
+            const form = document.getElementById('studentForm');
+            const btnDelete = document.getElementById('btnDeleteStudent');
+            form.reset();
+
+            if (id) {
+                const student = studentsList.find(s => s.id === id);
+                if (student) {
+                    document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-user-pen text-af-orange"></i> <span>Editar Aluno</span>';
+                    document.getElementById('studentId').value = student.id;
+                    document.getElementById('formName').value = student.name;
+                    document.getElementById('formAudience').value = student.audience;
+                    document.getElementById('formGuardian').value = student.guardian || '';
+                    document.getElementById('formPhone').value = student.phone;
+                    document.getElementById('formModality').value = student.modality;
+                    document.getElementById('formDueDay').value = student.dueDay;
+                    document.getElementById('formFee').value = student.monthlyFee;
+                    document.getElementById('formStatus').value = student.status;
+                    document.getElementById('formNotes').value = student.notes || '';
+                    btnDelete.classList.remove('hidden');
+                }
+            } else {
+                document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-user-plus text-af-orange"></i> <span>Novo Aluno</span>';
+                document.getElementById('studentId').value = '';
+                document.getElementById('formDueDay').value = new Date().getDate();
+                document.getElementById('formFee').value = '120.00';
+                document.getElementById('formStatus').value = 'ATIVA';
+                btnDelete.classList.add('hidden');
+            }
+
+            toggleKidsField();
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeStudentModal() {
+            const modal = document.getElementById('studentModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Salvar ou Criar Aluno
+        function handleSaveStudent(event) {
+            event.preventDefault();
+            const id = document.getElementById('studentId').value;
+            const name = document.getElementById('formName').value.trim();
+            const audience = document.getElementById('formAudience').value;
+            const guardian = document.getElementById('formGuardian').value.trim();
+            const phone = document.getElementById('formPhone').value.trim().replace(/\D/g, '');
+            const modality = document.getElementById('formModality').value;
+            const dueDay = parseInt(document.getElementById('formDueDay').value, 10);
+            const monthlyFee = parseFloat(document.getElementById('formFee').value) || 0;
+            const status = document.getElementById('formStatus').value;
+            const notes = document.getElementById('formNotes').value.trim();
+
+            if (!name || isNaN(dueDay) || isNaN(monthlyFee)) {
+                showToast('Preencha os campos obrigatórios corretamente.');
+                return;
+            }
+
+            if (id) {
+                // Editar existente
+                const index = studentsList.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    studentsList[index] = {
+                        ...studentsList[index],
+                        name, audience, guardian, phone, modality, dueDay, monthlyFee, status, notes
+                    };
+                    showToast(`Dados de ${name} atualizados com sucesso!`);
+                }
+            } else {
+                // Criar novo
+                const newStudent = {
+                    id: 'std_' + Date.now(),
+                    name, audience, guardian, phone, modality, dueDay, monthlyFee, status, notes
+                };
+                studentsList.unshift(newStudent);
+                showToast(`Novo aluno ${name} matriculado com sucesso!`);
+            }
+
+            saveStudentsToStorage();
+            closeStudentModal();
+            renderApp();
+        }
+
+        // Excluir Aluno
+        function handleDeleteStudent() {
+            const id = document.getElementById('studentId').value;
+            if (!id) return;
+
+            const student = studentsList.find(s => s.id === id);
+            const confirmName = student ? student.name : 'este aluno';
+
+            if (confirm(`Deseja realmente excluir o cadastro de ${confirmName}? Essa ação não pode ser desfeita.`)) {
+                studentsList = studentsList.filter(s => s.id !== id);
+                saveStudentsToStorage();
+                closeStudentModal();
+                renderApp();
+                showToast('Aluno removido do sistema.');
+            }
+        }
+
+        // Modal Rápido de Mudança de Status
+        function openQuickStatusModal(studentId) {
+            const student = studentsList.find(s => s.id === studentId);
+            if (!student) return;
+
+            activeStudentForQuickStatus = studentId;
+            document.getElementById('quickStatusText').textContent = `Alterar status atual de ${student.name} (${student.status}):`;
+            const modal = document.getElementById('quickStatusModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeQuickStatusModal() {
+            const modal = document.getElementById('quickStatusModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            activeStudentForQuickStatus = null;
+        }
+
+        function applyQuickStatus(newStatus) {
+            if (!activeStudentForQuickStatus) return;
+
+            const student = studentsList.find(s => s.id === activeStudentForQuickStatus);
+            if (student) {
+                student.status = newStatus;
+                saveStudentsToStorage();
+                renderApp();
+                showToast(`Status de ${student.name} alterado para ${newStatus}!`);
+            }
+            closeQuickStatusModal();
+        }
+
+        // Envio de Lembrete / Cobrança via WhatsApp
+        function sendBillingWhatsApp(studentId) {
+            const student = studentsList.find(s => s.id === studentId);
+            if (!student) return;
+
+            const today = new Date();
+            const currentMonthName = today.toLocaleDateString('pt-BR', { month: 'long' });
+            const dueInfo = getDueStatus(student.dueDay);
+
+            let greeting = `Olá, ${student.name}!`;
+            if (student.audience === 'KIDS' && student.guardian) {
+                greeting = `Olá, ${student.guardian}! Tudo bem? Falamos sobre o(a) aluno(a) ${student.name} na Android Fight.`;
+            }
+
+            const message = 
+`${greeting} 🥊🔥
+
+Passando para lembrar sobre a renovação da matrícula na *Academia Android Fight*:
+
+🥋 *Modalidade:* ${student.modality}
+📅 *Dia do Vencimento:* Todo dia ${student.dueDay} (Referente a ${currentMonthName})
+💰 *Valor da Mensalidade:* ${formatBRL(student.monthlyFee)}
+📌 *Situação:* ${dueInfo.label}
+
+Chave PIX e confirmações podem ser enviadas diretamente aqui por este número!
+Agradecemos por treinar com a gente e fazer parte da nossa família no tatame. OSS! 🥊`;
+
+            const phone = student.phone || '86995729225';
+            const cleanPhone = phone.replace(/\D/g, '');
+            const finalPhone = cleanPhone.startsWith('55') ? cleanPhone : '55' + cleanPhone;
+
+            const url = `https://wa.me/${finalPhone}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
 
-        // Gerar arquivo .ics de calendário para alarme automático no celular
-        function downloadCalendarReminder() {
-            const d = currentReminderData.dueDate;
-            const yearStr = d.getFullYear();
-            const monthStr = String(d.getMonth() + 1).padStart(2, '0');
-            const dayStr = String(d.getDate()).padStart(2, '0');
-            const dateIcs = `${yearStr}${monthStr}${dayStr}`;
-
-            const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//Android Fight//Lembrete de Matricula//PT',
-                'BEGIN:VEVENT',
-                `SUMMARY:🥊 Renovação Matrícula Android Fight (${currentReminderData.student})`,
-                `DESCRIPTION:Dia da cobrança da matrícula na Android Fight. Modalidade: ${currentReminderData.plan}. Contato WhatsApp: (86) 99572-9225`,
-                `DTSTART;VALUE=DATE:${dateIcs}`,
-                `DTEND;VALUE=DATE:${dateIcs}`,
-                'STATUS:CONFIRMED',
-                'BEGIN:VALARM',
-                'TRIGGER:-P1D',
-                'ACTION:DISPLAY',
-                'DESCRIPTION:Lembrete de Cobrança da Matrícula Android Fight amanhã!',
-                'END:VALARM',
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\r\n');
-
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.setAttribute('download', `matricula-android-fight-${dateIcs}.ics`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Toast de Notificação
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = text;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3500);
         }
 
-        // Inicializa o cálculo na abertura
+        // Prevenção XSS
+        function escapeHtml(string) {
+            if (!string) return '';
+            return String(string)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Render Geral
+        function renderApp() {
+            updateDashboardStats();
+            applyFilters();
+        }
+
+        // Inicialização ao carregar a janela
         window.addEventListener('DOMContentLoaded', () => {
-            updateReminder();
+            loadStudents();
         });
     </script>
 </body>
